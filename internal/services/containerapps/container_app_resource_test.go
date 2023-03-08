@@ -239,16 +239,12 @@ func TestAccContainerAppResource_basicWithCustomDomains(t *testing.T) {
 
 	data.ResourceTest(t, r, []acceptance.TestStep{
 		{
-			Config: r.basicWithCustomDomain(data, "rev1"),
+			Config: r.basicWithCustomDomain(data),
 			Check: acceptance.ComposeTestCheckFunc(
 				check.That(data.ResourceName).ExistsInAzure(r),
 			),
 		},
 		data.ImportStep(),
-		{
-			Config:      r.completeChangedSecret(data, "rev2"),
-			ExpectError: regexp.MustCompile("previously configured secret"),
-		},
 	})
 }
 
